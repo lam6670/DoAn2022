@@ -27,6 +27,7 @@ namespace BatStore.Models
         public string Tags { get; set; }
         public string Title { get; set; }
         public int? UnitsInStock { get; set; }
+        public string Thumb { get; set; }
 
         public virtual Category Cat { get; set; }
         public virtual ICollection<AttributesPrice> AttributesPrices { get; set; }

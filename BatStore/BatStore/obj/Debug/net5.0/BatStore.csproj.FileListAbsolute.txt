@@ -473,3 +473,9 @@ F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Vie
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminProducts\Details.cshtml.g.cs
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminProducts\Edit.cshtml.g.cs
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminProducts\Index.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminSearch\ListProductsSearchPartial.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Create.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Delete.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Details.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Edit.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Index.cshtml.g.cs

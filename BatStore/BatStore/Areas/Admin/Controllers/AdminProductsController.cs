@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BatStore.Models;
 using PagedList.Core;
+using BatStore.Helper;
+using System.IO;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BatStore.Areas.Admin.Controllers
 {
@@ -14,10 +17,12 @@ namespace BatStore.Areas.Admin.Controllers
     public class AdminProductsController : Controller
     {
         private readonly dbBatStoreContext _context;
+        public INotyfService _notifyService { get; }
 
-        public AdminProductsController(dbBatStoreContext context)
+        public AdminProductsController(dbBatStoreContext context, INotyfService notyfService)
         {
             _context = context;
+            _notifyService = notyfService;
         }
 
         // GET: Admin/AdminProducts
@@ -85,14 +90,27 @@ namespace BatStore.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,DateCreated,DateModified,BestSellers,Active,Tags,Title,UnitsInStock")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,DateCreated,DateModified,BestSellers,Active,Tags,Title,UnitsInStock,Thumb")] Product product,Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
+                product.ProductName = Utilities.ToTitleCase(product.ProductName);
+                if(fThumb != null)
+                {
+                    string extension = Path.GetExtension(fThumb.FileName);
+                    string image = Utilities.SEOUrl(product.ProductName) + extension;
+                    product.Thumb = await Utilities.UploadFile(fThumb, @"products", image.ToLower());
+                }
+                if (string.IsNullOrEmpty(product.Thumb)) product.Thumb = "default.jpg";
+                product.DateModified = DateTime.Now;
+                product.DateCreated = DateTime.Now;
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+                //_notifyService.Success("Thêm sản phẩm mới thành công");
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName", product.CatId);
             return View(product);
         }
@@ -119,7 +137,7 @@ namespace BatStore.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,DateCreated,DateModified,BestSellers,Active,Tags,Title,UnitsInStock")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,DateCreated,DateModified,BestSellers,Active,Tags,Title,UnitsInStock,Thumb")] Product product, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != product.ProductId)
             {
@@ -130,7 +148,17 @@ namespace BatStore.Areas.Admin.Controllers
             {
                 try
                 {
+                    product.ProductName = Utilities.ToTitleCase(product.ProductName);
+                    if (fThumb != null)
+                    {
+                        string extension = Path.GetExtension(fThumb.FileName);
+                        string image = Utilities.SEOUrl(product.ProductName) + extension;
+                        product.Thumb = await Utilities.UploadFile(fThumb, @"products", image.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(product.Thumb)) product.Thumb = "default.jpg";
+                    product.DateModified = DateTime.Now;                  
                     _context.Update(product);
+                    _notifyService.Success("Cập nhật sản phẩm thành công ");
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -177,6 +205,7 @@ namespace BatStore.Areas.Admin.Controllers
             var product = await _context.Products.FindAsync(id);
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
+            _notifyService.Success("Xóa thành công ");
             return RedirectToAction(nameof(Index));
         }
 

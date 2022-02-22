@@ -196,6 +196,8 @@ namespace BatStore.Models
 
                 entity.Property(e => e.ShortDesc).HasMaxLength(255);
 
+                entity.Property(e => e.Thumb).HasMaxLength(250);
+
                 entity.Property(e => e.Title).HasMaxLength(255);
 
                 entity.HasOne(d => d.Cat)
