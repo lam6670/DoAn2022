@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BatStore.Models;
 using PagedList.Core;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using BatStore.Helper;
+using System.IO;
 
 namespace BatStore.Areas.Admin.Controllers
 {
@@ -63,14 +65,26 @@ namespace BatStore.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CatId,CatName,Description,Ordering,Published,Thumb,Title")] Category category)
+        public async Task<IActionResult> Create([Bind("CatId,CatName,Description,Ordering,Published,Thumb,Title")] Category category, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
+                //Xử lý add ảnh (Thumb)
+                category.CatName = Utilities.ToTitleCase(category.CatName);
+                if (fThumb != null)
+                {
+                    string extension = Path.GetExtension(fThumb.FileName);
+                    string image = Utilities.SEOUrl(category.CatName) + extension;
+                    category.Thumb = await Utilities.UploadFile(fThumb, @"categories", image.ToLower());
+                }
+                if (string.IsNullOrEmpty(category.Thumb)) category.Thumb = "default.jpg";
                 _context.Add(category);
                 await _context.SaveChangesAsync();
+                _notifyService.Success("Thêm mới thành công");
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CatName", category.CatId);
             return View(category);
         }
 
@@ -95,7 +109,7 @@ namespace BatStore.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CatId,CatName,Description,Ordering,Published,Thumb,Title")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("CatId,CatName,Description,Ordering,Published,Thumb,Title")] Category category, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != category.CatId)
             {
@@ -106,8 +120,21 @@ namespace BatStore.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
+                    if (ModelState.IsValid)
+                    {
+                        category.CatName = Utilities.ToTitleCase(category.CatName);
+                        if (fThumb != null)
+                        {
+                            string extension = Path.GetExtension(fThumb.FileName);
+                            string image = Utilities.SEOUrl(category.CatName) + extension;
+                            category.Thumb = await Utilities.UploadFile(fThumb, @"categories", image.ToLower());
+                        }
+                        if (string.IsNullOrEmpty(category.Thumb)) category.Thumb = "default.jpg";
+                        _context.Update(category);
+                        await _context.SaveChangesAsync();
+                        _notifyService.Success("Cập nhật thành công");
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {

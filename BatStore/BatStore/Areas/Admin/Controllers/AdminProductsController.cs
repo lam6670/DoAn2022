@@ -104,10 +104,9 @@ namespace BatStore.Areas.Admin.Controllers
                 if (string.IsNullOrEmpty(product.Thumb)) product.Thumb = "default.jpg";
                 product.DateModified = DateTime.Now;
                 product.DateCreated = DateTime.Now;
-
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                //_notifyService.Success("Thêm sản phẩm mới thành công");
+                _notifyService.Success("Thêm mới thành công");
                 return RedirectToAction(nameof(Index));
             }
 
