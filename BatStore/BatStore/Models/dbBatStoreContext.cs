@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using BatStore.ModelView;
 
 #nullable disable
 
@@ -228,5 +229,7 @@ namespace BatStore.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<BatStore.ModelView.RegisterViewModel> RegisterViewModel { get; set; }
     }
 }

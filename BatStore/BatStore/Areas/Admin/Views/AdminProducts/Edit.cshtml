@@ -16,9 +16,11 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="AdminProducts" asp-action="Edit" method="post" enctype="multipart/form-data" asp-route-id="@Model.ProductId" method="post">
+        <form asp-controller="AdminProducts" asp-action="Edit" method="post" enctype="multipart/form-data" asp-route-id="@Model.ProductId">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="Thumb" />
+            <input type="hidden" asp-for="DateCreated" />
             <div class="form-group">
                 <label asp-for="ProductName" class="control-label">Tên sản phẩm</label>
                 <input asp-for="ProductName" class="form-control" />

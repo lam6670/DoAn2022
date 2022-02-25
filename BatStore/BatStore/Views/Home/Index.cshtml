@@ -1,5 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model BatStore.ModelView.HomeView;
+@{
+    ViewData["Title"] = "Bat Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Product> allProduct = ViewBag.AllProducts;
 }
 
 <!-- Begin Slider Area -->
@@ -151,7 +154,7 @@
                             <div class="product-tab-icon">
                                 <img src="~/assets/images/product/icon/1.png" alt="Product Icon">
                             </div>
-                            All Items
+                            Tất cả sản phẩm
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">

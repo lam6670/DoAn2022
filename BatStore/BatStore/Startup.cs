@@ -1,5 +1,6 @@
 using AspNetCoreHero.ToastNotification;
 using BatStore.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,12 @@ namespace BatStore
             services.AddDbContext<dbBatStoreContext>(option => option.UseSqlServer(stringConnectdb));
 
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
-
+            services.AddSession();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+               .AddCookie(p => {
+                   p.LoginPath = "/login.html";
+                   p.AccessDeniedPath = "/";
+               });
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
         }
@@ -52,9 +58,10 @@ namespace BatStore
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

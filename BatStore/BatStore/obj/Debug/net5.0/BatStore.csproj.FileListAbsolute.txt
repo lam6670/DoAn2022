@@ -479,3 +479,10 @@ F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Vie
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Details.cshtml.g.cs
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Edit.cshtml.g.cs
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Index.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Product\List.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Home\_ListProductPartialView.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Accounts\Register.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Accounts\Login.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Accounts\Dashboard.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Accounts\_DonHangPartialView.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Accounts\_ChangePasswordPartialView.cshtml.g.cs
