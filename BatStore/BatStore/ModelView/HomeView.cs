@@ -9,6 +9,7 @@ namespace BatStore.ModelView
     public class HomeView // HomeViewVM
     {
         public List<ProductHomeView> Products { get; set; }
+        public Category Categories { get; set; }
         //public List<TinDang> Tintucs { get; set; }
     }
 }

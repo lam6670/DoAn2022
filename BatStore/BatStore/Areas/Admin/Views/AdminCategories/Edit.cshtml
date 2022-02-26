@@ -16,7 +16,7 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-controller="AdminCategories" asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CatId" />
             <div class="form-group">
@@ -42,8 +42,8 @@
                 <label>Published</label>
             </div>
             <div class="form-group">
-                <label asp-for="Thumb" class="control-label">Ảnh đại diện</label>
-                <input asp-for="Thumb" class="form-control" />
+                <label class="font-weight-semibold" for="productBrand">Ảnh đại diện</label>
+                <input name="fThumb" asp-for="Thumb" type="file" class="form-control-file" />
                 <span asp-validation-for="Thumb" class="text-danger"></span>
             </div>
             <div class="form-group">
