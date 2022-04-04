@@ -51,6 +51,7 @@ namespace BatStore.Controllers
                 model.Email = khachhang.Email;
                 model.Phone = khachhang.Phone;
                 model.Address = khachhang.Address;
+
             }
             //ViewData["lsTinhThanh"]
             ViewBag.GioHang = cart;
@@ -131,10 +132,11 @@ namespace BatStore.Controllers
                     return RedirectToAction("Login", "Accounts", new { returnUrl = "Order-success.html" });
                 }
                 var khachhang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.CustomerId == Convert.ToInt32(IdTaikhoan));
-                var donhang = _context.Orders.Where(x => x.CustomerId == Convert.ToInt32(IdTaikhoan)).OrderByDescending(x => x.OrderDate);
+                var donhang = _context.Orders.Where(x => x.CustomerId == Convert.ToInt32(IdTaikhoan)).OrderByDescending(x => x.OrderDate).FirstOrDefault();
+               
                 MuaHangSuccessVM successVM = new MuaHangSuccessVM();
                 successVM.FullName = khachhang.FullName;
-                //successVM.DonHangID = donhang.OrderId;
+                successVM.DonHangID = donhang.OrderId;
                 successVM.Phone = khachhang.Phone;
                 successVM.Address = khachhang.Address;
 

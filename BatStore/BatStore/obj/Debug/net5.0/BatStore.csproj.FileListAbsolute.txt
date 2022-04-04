@@ -489,3 +489,4 @@ F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Accounts\
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\ShoppingCart\Index.cshtml.g.cs
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Shared\Components\HeaderCart\Default.cshtml.g.cs
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Shared\Components\NumberCart\Default.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Checkout\Index.cshtml.g.cs
