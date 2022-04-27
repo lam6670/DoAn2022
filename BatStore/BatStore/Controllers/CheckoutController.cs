@@ -91,10 +91,10 @@ namespace BatStore.Controllers
                     donhang.Note = Utilities.StripHTML(model.Note);
                     donhang.TotalMoney = Convert.ToInt32(cart.Sum(x => x.TotalMoney));
                     _context.Add(donhang);
-                    _context.SaveChanges();
 
 
-                    foreach(var item in cart)
+
+                    foreach (var item in cart)
                     {
                         OrderDetail orderDetail = new OrderDetail();
                         orderDetail.OrderDetailId = donhang.OrderId;
@@ -107,9 +107,10 @@ namespace BatStore.Controllers
 
 
                     }
-                    _context.SaveChanges();
+                    
                     HttpContext.Session.Remove("Cart");
                     _notyfService.Success("Đặt hàng thành công");
+                    _context.SaveChanges();
                     return RedirectToAction("Success");
                 }
             }
@@ -129,11 +130,11 @@ namespace BatStore.Controllers
                 var IdTaikhoan = HttpContext.Session.GetString("CustomerId");
                 if(string.IsNullOrEmpty(IdTaikhoan))
                 {
-                    return RedirectToAction("Login", "Accounts", new { returnUrl = "Order-success.html" });
+                    return RedirectToAction("Login", "Accounts", new { returnUrl = "/Order-success.html" });
                 }
                 var khachhang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.CustomerId == Convert.ToInt32(IdTaikhoan));
                 var donhang = _context.Orders.Where(x => x.CustomerId == Convert.ToInt32(IdTaikhoan)).OrderByDescending(x => x.OrderDate).FirstOrDefault();
-               
+
                 MuaHangSuccessVM successVM = new MuaHangSuccessVM();
                 successVM.FullName = khachhang.FullName;
                 successVM.DonHangID = donhang.OrderId;

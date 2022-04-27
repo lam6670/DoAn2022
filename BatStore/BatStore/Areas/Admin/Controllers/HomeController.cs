@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace BatStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/Home")]
     public class HomeController : Controller
     {
         public IActionResult Index()

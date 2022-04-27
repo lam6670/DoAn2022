@@ -490,3 +490,13 @@ F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\ShoppingC
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Shared\Components\HeaderCart\Default.cshtml.g.cs
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Shared\Components\NumberCart\Default.cshtml.g.cs
 F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Checkout\Index.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Checkout\Success.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminOrders\Create.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminOrders\Delete.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminOrders\Details.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminOrders\Edit.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminOrders\Index.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Views\Orders\Details.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminOrders\ChangeStatus.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_AdminLayoutLogin.cshtml.g.cs
+F:\Thuctap\Web_BatStore\BatStore\BatStore\obj\Debug\net5.0\Razor\Areas\Admin\Views\Account\Login.cshtml.g.cs

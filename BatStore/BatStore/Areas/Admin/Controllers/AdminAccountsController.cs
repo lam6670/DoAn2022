@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BatStore.Models;
+using BatStore.Extention;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using BatStore.Areas.Admin.Models;
 
 namespace BatStore.Areas.Admin.Controllers
 {
@@ -13,10 +16,11 @@ namespace BatStore.Areas.Admin.Controllers
     public class AdminAccountsController : Controller
     {
         private readonly dbBatStoreContext _context;
-
-        public AdminAccountsController(dbBatStoreContext context)
+        public INotyfService _notifyService { get; }
+        public AdminAccountsController(dbBatStoreContext context, INotyfService notyfService)
         {
             _context = context;
+            _notifyService = notyfService;
         }
 
         // GET: Admin/AdminAccounts
@@ -68,13 +72,50 @@ namespace BatStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                account.Password = (account.Phone).ToMD5();
+                account.CreateDate = DateTime.Now;
                 _context.Add(account);
                 await _context.SaveChangesAsync();
+                _notifyService.Success("Tạo mới tài khoản quản trị thành công");
                 return RedirectToAction(nameof(Index));
             }
             ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RoleId", "RoleName", account.RoleId);
             return View(account);
         }
+
+        // GET: Admin/AdminAccounts/ChangePassword
+        public IActionResult ChangePassword()
+        {
+            ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RoleId", "RoleName");
+            return View();
+        }
+        // GET: Admin/AdminAccounts/ChangePassword
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var taikhoan = _context.Accounts.AsNoTracking().SingleOrDefault(x=>x.Email==model.Email);
+                if (taikhoan == null) return RedirectToAction("Login", "Accounts");
+
+
+                var pass = model.PasswordNow.Trim().ToMD5();
+                if (pass == taikhoan.Password)
+                {
+                    string newpass = (model.Password.Trim().ToMD5());
+                    taikhoan.Password = newpass;
+                    taikhoan.LastLogin = DateTime.Now;
+                    _context.Update(taikhoan);
+
+                    _context.SaveChanges();
+                    _notifyService.Success("Đổi mật khẩu thành công ");
+                    return RedirectToAction("Dashboard", "Accounts",new { Area = "Admin"});
+                }
+            }
+            return View();
+        }
+
+
 
         // GET: Admin/AdminAccounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
