@@ -72,9 +72,9 @@ namespace BatStore.Controllers
                 model.FullName = khachhang.FullName;
                 model.Email = khachhang.Email;
                 model.Phone = khachhang.Phone;
-                model.Address = khachhang.Address;
-
                 khachhang.Address = muaHang.Address;
+                model.Note = muaHang.Note;
+                model.Address = khachhang.Address;
                 _context.Update(khachhang);
                 _context.SaveChanges();
             }
@@ -91,9 +91,6 @@ namespace BatStore.Controllers
                     donhang.Note = Utilities.StripHTML(model.Note);
                     donhang.TotalMoney = Convert.ToInt32(cart.Sum(x => x.TotalMoney));
                     _context.Add(donhang);
-
-
-
                     foreach (var item in cart)
                     {
                         OrderDetail orderDetail = new OrderDetail();
