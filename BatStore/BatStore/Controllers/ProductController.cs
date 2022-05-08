@@ -22,7 +22,7 @@ namespace BatStore.Controllers
             try
             {
                 var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-                var pageSize = 10;
+                var pageSize = 9;
                 var lsTinDangs = _context.Products.AsNoTracking().OrderByDescending(x => x.DateCreated);
                 PagedList<Product> models = new PagedList<Product>(lsTinDangs, pageNumber, pageSize);
                 ViewBag.CurrentPage = pageNumber;
